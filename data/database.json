@@ -1,0 +1,22 @@
+[
+ {
+  "title": "The goose and the gander",
+  "genre": "Animation",
+  "id": 1
+ },
+ {
+  "title": "The Blacklist",
+  "genre": "Action",
+  "id": 2
+ },
+ {
+  "title": "POWER",
+  "genre": "Cartel and drugs",
+  "id": 3
+ },
+ {
+  "title": "The Red Carpet",
+  "genre": "Love and romance",
+  "id": 4
+ }
+]
