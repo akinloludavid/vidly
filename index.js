@@ -5,6 +5,8 @@ const app = express()
 const customer = require('./routes/customers')
 const genre = require('./routes/genres')
 const mongoose = require('mongoose')
+const Joi = require('joi')
+
 
 mongoose.connect('mongodb://localhost/vidlyapp')
   .then(() => console.log('Connected to DB'))

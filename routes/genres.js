@@ -1,17 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const mongoose = require('mongoose')
 const Joi = require('joi')
-
-
-const movieSchema = new mongoose.Schema({
-  title: String,
-  genre: String,
-  rating: Number
-})
-
-const Moviedb = mongoose.model('Movies', movieSchema)
-
+const Moviedb = require('../models/genre')
 
 router.get('/', async (req, res) => {
   const movies = await Moviedb.find()
