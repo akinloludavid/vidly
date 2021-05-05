@@ -2,22 +2,18 @@ const express = require('express')
 const router = express.Router();
 const mongoose = require('mongoose')
 const Joi = require('joi')
-const movies = require('../data/database.json')
 
-mongoose.connect('mongodb://localhost/moviecollection')
-  .then(()=> console.log('Connected to DB'))
-  .catch((err)=> console.log('Error in database connection', err) )
 
 const movieSchema = new mongoose.Schema({
-  title:String,
+  title: String,
   genre: String,
-  rating:Number
+  rating: Number
 })
 
 const Moviedb = mongoose.model('Movies', movieSchema)
 
 
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
   const movies = await Moviedb.find()
   res.send(movies)
 })
@@ -33,15 +29,15 @@ router.post('/', async (req, res) => {
   const schema = Joi.object({
     title: Joi.string().min(4).required(),
     genre: Joi.string().min(4).required(),
-    rating:Joi.number
+    rating: Joi.number
   })
   const result = schema.validate(req.body)
   if (result.error) {
     return res.status(400).send(result.error.details[0].message)
   }
-  let movie =  new Moviedb({
+  let movie = new Moviedb({
     title: req.body.title,
-    genre:req.body.genre
+    genre: req.body.genre
   })
 
   movie = await movie.save()
@@ -50,10 +46,10 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   let movie = await Moviedb.findByIdAndUpdate(req.params.id, {
-    title:req.body.title,
+    title: req.body.title,
     genre: req.body.genre,
-  },{
-    new:true
+  }, {
+    new: true
   })
   if (!movie) res.status(400).send('No movie match such id')
   const schema = Joi.object({
@@ -71,11 +67,12 @@ router.put('/:id', async (req, res) => {
 
 
 router.delete('/:id', async (req, res) => {
-  const movie = await Moviedb.deleteOne({_id:req.params.id})
+  const movie = await Moviedb.deleteOne({
+    _id: req.params.id
+  })
   if (!movie) res.status(400).send('No movie match such id')
   res.send(movie)
 })
 
 
-module.exports =router
-
+module.exports = router
