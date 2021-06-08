@@ -12,8 +12,8 @@ jobs:
        - checkout 
        - run: 
          name: Install all dependencies
-         command: yarn
+         command: npm install
        - run: 
          name: Run tests
-         command: yarn test
+         command: npm run test
          
